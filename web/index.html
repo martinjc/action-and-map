@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <script>
+        fetch('data/data.csv')
+            .then(response => response.text())
+            .then(data => {
+                const rows = data.split('\n');
+                const table = document.createElement('table');
+                rows.forEach(row => {
+                    const columns = row.split(',');
+                    const tr = document.createElement('tr');
+                    columns.forEach(column => {
+                        const td = document.createElement('td');
+                        td.textContent = column;
+                        tr.appendChild(td);
+                    });
+                    table.appendChild(tr);
+                });
+                document.body.appendChild(table);
+            });
+    </script>
+</body>
+</html>
