@@ -20,7 +20,7 @@ jobs:
           pip install requests
       - name: execute python script
         run: |
-          python ./scripts/app.py
+          python scripts/api.py
       - name: commit changes
         run: |
           git add .
