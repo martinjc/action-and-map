@@ -13,12 +13,14 @@ jobs:
         uses: actions/checkout@v4
       - name: setup python
         uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
       - name: install deps
         run: |
           pip install requests
       - name: execute python script
         run: |
-          python scripts/app.py
+          python ./scripts/app.py
       - name: commit changes
         run: |
           git add .
