@@ -3,27 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
+    <title>Actions and CSVs and Maps Oh My</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+  <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <script>
-        fetch('data/data.csv')
-            .then(response => response.text())
-            .then(data => {
-                const rows = data.split('\n');
-                const table = document.createElement('table');
-                rows.forEach(row => {
-                    const columns = row.split(',');
-                    const tr = document.createElement('tr');
-                    columns.forEach(column => {
-                        const td = document.createElement('td');
-                        td.textContent = column;
-                        tr.appendChild(td);
-                    });
-                    table.appendChild(tr);
-                });
-                document.body.appendChild(table);
-            });
-    </script>
+    <div id="map">
+
+    </div>
+    <div id="data">
+
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
