@@ -9,29 +9,53 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+// a variable to store our data
 let ourData = [];
 
+// variable to keep a reference to all our markers
+let markers = [];
+
+// a function to retrieve the latest data from the repository
 function getData() {
     fetch('data/data.csv')
     .then(response => response.text())
     .then(data => {
+        // parse the csv file into an array of arrays
+        // this is pretty basic and won't work with all csv files
         const rows = data.split('\n');
         rows.forEach(row => {
-            ourData.push(row.split(','));
+            if(row.length > 0) {
+                ourData.push(row.split(','));
+            }
         });
+        // add the data to the map and the table
+        clearTable();
         writeTable(ourData);
+        clearMarkers()
         drawMarkers(ourData);
-        console.log(ourData);
     });
 }
 
+function clearTable() {
+    document.getElementById('data').innerHTML = '';
+}
+
+function clearMarkers() {
+    markers.forEach(marker => {
+        marker.remove();
+    });
+    markers = [];
+}
+
+// draw markers on the map for each data point
 function drawMarkers(data) {
     data.forEach(row => {
-        console.log(row);
-        L.marker([+row[0], +row[1]]).bindPopup(`data: ${row[2]}`).addTo(map);
+        let m = L.marker([+row[0], +row[1]]).bindPopup(`data: ${row[2]}`).addTo(map);
+        markers.push(m);
     });
 } 
 
+// write the data into an HTML table
 function writeTable(data) {
     const table = document.createElement('table');
     data.forEach(row => {
@@ -46,4 +70,8 @@ function writeTable(data) {
     });
 }
 
+// call the function that kicks it all off
 getData();
+
+// make the page update every hour
+setInterval(getData, (1000 * 60 * 60)); // every hour
