@@ -1,0 +1,26 @@
+name: update-from-api
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  getdata:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: setup python
+        uses: actions/setup-python@v5
+      - name: install deps
+        run: |
+          pip install requests
+      - name: execute python script
+        run: |
+          python scripts/app.py
+      - name: commit changes
+        run: |
+          git add .
+          git commit -m 'update'
+          git push
+        
