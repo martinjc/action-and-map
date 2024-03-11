@@ -23,6 +23,8 @@ jobs:
           python scripts/api.py
       - name: commit changes
         run: |
+          git config user.email "martin.chorley@gmail.com"
+          git config user.name "Martin Chorley"
           git add .
           git commit -m 'update'
           git push
