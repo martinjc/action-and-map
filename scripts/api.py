@@ -16,7 +16,7 @@ if lat_response.status_code == 200 and lng_response.status_code == 200 and str_r
     lng = int(lng_response.text)
     
     # Open a new CSV file in write mode
-    with open('data/data.csv', 'a') as file:
+    with open('web/data/data.csv', 'a') as file:
         file.write(f'{lat},{lng},{str_response.text}')
 else:
     print(f'Failed to get data: {lat_response.status_code}, {lng_response.status_code}, {str_response.status_code}')
