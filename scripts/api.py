@@ -1,5 +1,4 @@
 import requests
-import csv
 
 coords = [48, -13, 64, 3]
 
