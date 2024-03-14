@@ -20,19 +20,16 @@ function getData() {
     fetch('data/data.csv')
     .then(response => response.text())
     .then(data => {
-        // parse the csv file into an array of arrays
-        // this is pretty basic and won't work with all csv files
-        const rows = data.split('\n');
-        rows.forEach(row => {
-            if(row.length > 0) {
-                ourData.push(row.split(','));
+        Papa.parse(data, {
+            skipEmptyLines: true,
+            complete: function(results) {
+                ourData = results.data;
+                clearTable();
+                writeTable(ourData);
+                clearMarkers();
+                drawMarkers(ourData);
             }
         });
-        // add the data to the map and the table
-        clearTable();
-        writeTable(ourData);
-        clearMarkers()
-        drawMarkers(ourData);
     });
 }
 
