@@ -28,8 +28,8 @@ jobs:
           python scripts/api.py
       - name: commit changes
         run: |
-          git config user.email "martin.chorley@gmail.com"
-          git config user.name "Martin Chorley"
+          git config user.email "imran271828@gmail.com"
+          git config user.name "Muhammad Imran"
           git add .
           git commit -m 'update'
           git push
