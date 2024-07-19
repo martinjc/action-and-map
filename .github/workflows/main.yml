@@ -1,8 +1,6 @@
 name: update-from-api
 
 on:
-  schedule:
-    - cron: "*/60 * * * *"
   workflow_dispatch:
 
 permissions:
